@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+#home {
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    padding: 0 !important;
+
+    canvas#polyCanvas {
+        pointer-events: none;
+    }
+    .home__content {
+        color: white;
+        z-index: 5;
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            letter-spacing: 0.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 3rem rgba(255,255,255,0.5);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-top: 15%;
+        }
+
+        ul {
+            margin-top: 2rem;
+
+            li {
+                a {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.25);
+    }
+}
+
+@include mobile {
+    #home {
+
+        .home__content {
+
+            h1 {
+                font-size: 3rem;
+                letter-spacing: 0.25rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    }
+}

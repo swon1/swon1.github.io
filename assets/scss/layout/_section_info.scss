@@ -1,0 +1,264 @@
+@charset "utf-8";
+
+@import '../base/mixin';
+
+#info {
+    background-color: #eee;
+
+    .info__content {
+        padding-top: 10rem;
+
+        > li {
+            flex: 1 1 1%;
+
+            &:first-child {
+                flex-grow: 1.5;
+            }
+        }
+    }
+
+    .info__content--profile {
+
+        img {
+            max-width: 20rem;
+        }
+        p {
+            font-size: 1.2rem;
+            white-space: pre-line;
+
+            strong {
+                font-size: 1.4rem;
+                letter-spacing: 0.05rem;
+            }
+            .mobile {
+                display: none;
+            }
+        }
+        ul {
+            margin-top: 2rem;
+            li {
+                a {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+
+    .info__content--history {
+
+        dl {
+            margin-bottom: 5rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            dd {
+
+                li {
+                    font-size: 1.2rem;
+                    margin-bottom: 1.5rem;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        .info__history--date {
+            font-size: 1rem;
+            color:rgba(0,0,0,0.65);
+        }
+    }
+
+    .info__content--skill {
+
+        dl {
+            
+            dd {
+
+                li {
+                    align-items: center;
+                    margin-bottom: 3rem;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    img {
+                        width: 2.2rem;
+                    }
+                    p {
+                        font-size: 1.1rem;
+                        letter-spacing: 0.05rem;
+                        margin-left: 3%;
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    dt {
+        font-size: 1.5rem;
+        letter-spacing: 0.1rem;
+        font-weight: bold;
+        margin-bottom: 3rem;
+    }
+
+}
+
+@include tablet {
+    #info {
+        .info__content {
+            padding-top: 5rem;
+
+            > li {
+                flex: none;
+                width: 50%;
+            }
+        }
+
+        .info__content--profile {
+            display: flex;
+            width: 100% !important;
+            margin-bottom: 4%;
+
+            img {
+                max-width: 15rem;
+                height: min-content;
+            }
+            p {
+                margin-left: 4%;
+
+                strong {
+                    margin-top: -3%;
+                }
+            }
+            ul {
+                margin-top: 0;
+                margin-left: 3%;
+            }
+        }
+
+        .info__content--history {
+
+            dl {
+                margin-bottom: 5%;
+
+                dd {
+
+                    li {
+                        margin-bottom: 1%;
+                    }
+                }
+            }
+        }
+
+        .info__content--skill {
+
+            dl {
+                
+                dd {
+
+                    li {
+                        margin-bottom: 3%;
+                    }
+                }
+            }
+        }
+
+        dt {
+            margin-bottom: 2%;
+        }
+    }
+}
+
+@include mobile {
+    #info {
+        .info__content {
+            padding-top: 5rem;
+            flex-direction: column;
+
+            > li {
+                flex: none;
+            }
+        }
+
+        .info__content--profile {
+            display: flex;
+            margin-bottom: 1rem;
+
+            img {
+                max-width: 10rem;
+                height: min-content;
+            }
+            p {
+                margin-left: 4%;
+
+                strong {
+                    margin-top: -2rem;
+                }
+                span {
+                    display: none;
+                }
+                .mobile {
+                    display: block;
+                }
+            }
+            ul {
+                display: none;
+            }
+        }
+
+        .info__content--history {
+
+            dl {
+                padding-right: 5%;
+                margin-bottom: 2rem;
+
+                dd {
+
+                    li {
+                        display: flex;
+                        margin-bottom: 1rem;
+
+                        span {
+                            font-size: 1.2rem !important;
+                            margin-right: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        .info__content--skill {
+
+            dl {
+                
+                dd {
+
+                    ul {
+                        display: flex;
+                        justify-content: space-between;
+                        padding-right: 3rem;
+
+                        li {
+                            margin-bottom: 0;
+                        }
+                    }
+
+                    p {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        dt {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+    }
+}

@@ -1,0 +1,873 @@
+@charset "UTF-8";
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; /* iOS 가로 모드 글자 크기 뻥튀기 방지 */
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed; /* 렌더링 속도 최적화 */
+  -webkit-font-smoothing: antialiased; /* 폰트 부드럽게 (Mac OS) */
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Noto Sans KR", "Nanum Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* 7. 폼 요소 폰트 상속 (크로스브라우징 핵심 이슈 해결) */
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none; /* 디자인에 따라 1px solid #ccc 등으로 변경 가능 */
+}
+
+/* 8. 버튼 클릭 시 커서 포인터 & 터치 최적화 */
+button {
+  cursor: pointer;
+  touch-action: manipulation; /* 더블탭 줌 방지 (모바일 UX) */
+}
+
+/* 9. 텍스트 줄바꿈 최적화 (2024+ 트렌드) */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance; /* 제목이 한 단어만 툭 떨어지는 것 방지 */
+  line-height: 1.1;
+}
+
+p {
+  text-wrap: pretty; /* 단락의 마지막 줄에 한 단어만 남는 것 방지 (고아 단어 방지) */
+}
+
+/* 10. 링크 기본 스타일 */
+a {
+  text-decoration-skip-ink: auto; /* 밑줄이 글자를 가리지 않도록 설정 */
+  color: inherit;
+  text-decoration: none;
+}
+
+em {
+  font-style: normal;
+}
+
+/* 11. 숨김 속성 강제 적용 */
+[hidden] {
+  display: none !important;
+}
+
+/* 12. 접근성: 키보드 포커스 스타일은 절대 끄지 않음 (마우스 클릭 시엔 제거 가능) */
+:focus-visible {
+  outline: 2px solid #2563eb; /* 브랜드 컬러로 변경 권장 */
+  outline-offset: 2px;
+}
+
+/* 13. (선택사항) 2025년 최신: 애니메이션 높이 보간 허용 */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords; /* height: auto로의 애니메이션 허용 (지원 브라우저 한정) */
+  }
+}
+/* 14. 사용자 설정: 동작 줄이기 (접근성) */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.ir {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-none {
+  font-size: 0;
+  text-indent: -9999px;
+  color: transparent;
+}
+
+.inner {
+  position: relative;
+  display: block;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.block {
+  display: block;
+}
+
+.flex-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.unit-full {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+i {
+  pointer-events: none;
+}
+
+#nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  max-width: 7rem;
+  height: 100%;
+  z-index: 99;
+}
+#nav nav {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  max-width: 7rem;
+  padding-right: 2rem;
+}
+#nav nav ul {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+#nav nav ul li {
+  margin: 2% 0;
+}
+#nav nav ul li a {
+  display: block;
+  position: relative;
+  font-size: 1.2rem;
+  transition: 1s ease-in-out;
+}
+#nav nav ul li a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0%;
+  height: 1px;
+  background: #222;
+  transition: 0.33s ease-in-out;
+}
+#nav nav ul li a:hover::after {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+#nav nav ul li a.active::after {
+  width: 100%;
+}
+#nav[data-section=home] a, #nav[data-section=project] a {
+  color: #fff;
+}
+#nav[data-section=home] a::after, #nav[data-section=project] a::after {
+  background: #fff;
+}
+
+@media (max-width: 750px) {
+  #nav {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    height: 5rem;
+  }
+  #nav nav {
+    top: 50%;
+    right: 0;
+    max-width: none;
+    padding-right: 0;
+  }
+  #nav nav ul {
+    flex-direction: row;
+    align-items: center;
+  }
+  #nav nav ul li {
+    margin: 0 3%;
+    padding: 2% 0;
+  }
+}
+#content {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+#content section {
+  top: 80%;
+  padding: 5% 0 0 5%;
+  overflow: hidden;
+}
+#content section h2 {
+  letter-spacing: 0.1rem;
+}
+
+#home {
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  padding: 0 !important;
+}
+#home canvas#polyCanvas {
+  pointer-events: none;
+}
+#home .home__content {
+  color: white;
+  z-index: 5;
+}
+#home .home__content h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 3rem rgba(255, 255, 255, 0.5);
+}
+#home .home__content p {
+  font-size: 1.2rem;
+  margin-top: 15%;
+}
+#home .home__content ul {
+  margin-top: 2rem;
+}
+#home .home__content ul li a {
+  font-size: 2rem;
+}
+#home::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 750px) {
+  #home .home__content h1 {
+    font-size: 3rem;
+    letter-spacing: 0.25rem;
+  }
+  #home .home__content p {
+    font-size: 1rem;
+  }
+}
+#info {
+  background-color: #eee;
+}
+#info .info__content {
+  padding-top: 10rem;
+}
+#info .info__content > li {
+  flex: 1 1 1%;
+}
+#info .info__content > li:first-child {
+  flex-grow: 1.5;
+}
+#info .info__content--profile img {
+  max-width: 20rem;
+}
+#info .info__content--profile p {
+  font-size: 1.2rem;
+  white-space: pre-line;
+}
+#info .info__content--profile p strong {
+  font-size: 1.4rem;
+  letter-spacing: 0.05rem;
+}
+#info .info__content--profile p .mobile {
+  display: none;
+}
+#info .info__content--profile ul {
+  margin-top: 2rem;
+}
+#info .info__content--profile ul li a {
+  font-size: 2rem;
+}
+#info .info__content--history dl {
+  margin-bottom: 5rem;
+}
+#info .info__content--history dl:last-child {
+  margin-bottom: 0;
+}
+#info .info__content--history dl dd li {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+#info .info__content--history dl dd li:last-child {
+  margin-bottom: 0;
+}
+#info .info__content--history .info__history--date {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+#info .info__content--skill dl dd li {
+  align-items: center;
+  margin-bottom: 3rem;
+}
+#info .info__content--skill dl dd li:last-child {
+  margin-bottom: 0;
+}
+#info .info__content--skill dl dd li img {
+  width: 2.2rem;
+}
+#info .info__content--skill dl dd li p {
+  font-size: 1.1rem;
+  letter-spacing: 0.05rem;
+  margin-left: 3%;
+}
+#info dt {
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 750px) and (max-width: 1200px) {
+  #info .info__content {
+    padding-top: 5rem;
+  }
+  #info .info__content > li {
+    flex: none;
+    width: 50%;
+  }
+  #info .info__content--profile {
+    display: flex;
+    width: 100% !important;
+    margin-bottom: 4%;
+  }
+  #info .info__content--profile img {
+    max-width: 15rem;
+    height: min-content;
+  }
+  #info .info__content--profile p {
+    margin-left: 4%;
+  }
+  #info .info__content--profile p strong {
+    margin-top: -3%;
+  }
+  #info .info__content--profile ul {
+    margin-top: 0;
+    margin-left: 3%;
+  }
+  #info .info__content--history dl {
+    margin-bottom: 5%;
+  }
+  #info .info__content--history dl dd li {
+    margin-bottom: 1%;
+  }
+  #info .info__content--skill dl dd li {
+    margin-bottom: 3%;
+  }
+  #info dt {
+    margin-bottom: 2%;
+  }
+}
+@media (max-width: 750px) {
+  #info .info__content {
+    padding-top: 5rem;
+    flex-direction: column;
+  }
+  #info .info__content > li {
+    flex: none;
+  }
+  #info .info__content--profile {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  #info .info__content--profile img {
+    max-width: 10rem;
+    height: min-content;
+  }
+  #info .info__content--profile p {
+    margin-left: 4%;
+  }
+  #info .info__content--profile p strong {
+    margin-top: -2rem;
+  }
+  #info .info__content--profile p span {
+    display: none;
+  }
+  #info .info__content--profile p .mobile {
+    display: block;
+  }
+  #info .info__content--profile ul {
+    display: none;
+  }
+  #info .info__content--history dl {
+    padding-right: 5%;
+    margin-bottom: 2rem;
+  }
+  #info .info__content--history dl dd li {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  #info .info__content--history dl dd li span {
+    font-size: 1.2rem !important;
+    margin-right: 1rem;
+  }
+  #info .info__content--skill dl dd ul {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 3rem;
+  }
+  #info .info__content--skill dl dd ul li {
+    margin-bottom: 0;
+  }
+  #info .info__content--skill dl dd p {
+    display: none;
+  }
+  #info dt {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+#project {
+  color: #fff;
+  background-color: #333;
+}
+#project h2 {
+  color: #fff;
+}
+#project .project__content {
+  height: 80%;
+  padding-top: 5%;
+}
+#project .project__content .project__content--box {
+  width: 90%;
+  height: 100%;
+}
+#project .project__content .project__content--box > li {
+  height: 100%;
+  width: 25%;
+}
+#project .project__content .project__content--box > li:nth-child(2) {
+  width: 75%;
+  padding-left: 3%;
+}
+#project .project__content .project__content--git {
+  position: relative;
+  padding: 6%;
+  background: rgba(255, 255, 255, 0.05);
+  transition: 0.33s ease-in-out;
+}
+#project .project__content .project__content--git .project__content--git-img {
+  position: relative;
+}
+#project .project__content .project__content--git .project__content--git-img::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  transition: 0.33s ease-in-out;
+}
+#project .project__content .project__content--git .project__content--git-text {
+  padding-top: 5%;
+}
+#project .project__content .project__content--git .project__content--git-text strong {
+  display: block;
+  font-size: 1.2rem;
+  padding-bottom: 3%;
+}
+#project .project__content .project__content--git .project__content--git-text i {
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: 0.33s ease-in-out;
+}
+#project .project__content .project__content--git:hover {
+  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.1);
+}
+#project .project__content .project__content--git:hover .project__content--git-img::after {
+  opacity: 0.25;
+}
+#project .project__content .project__content--git:hover i {
+  transform: translateX(1rem);
+}
+#project .project__content .project__content--list {
+  position: relative;
+  height: 100%;
+}
+#project .project__content .project__content--list > div {
+  transform-origin: top left;
+  transition: 0.33s ease-in-out;
+}
+#project .project__content .project__content--list .project__content--list-viewbox {
+  position: relative;
+  width: 35%;
+  padding: 2%;
+  background: #fff;
+  pointer-events: visible;
+}
+#project .project__content .project__content--list .project__content--list-viewbox .project__content--list-viewimg {
+  position: relative;
+}
+#project .project__content .project__content--list .project__content--list-viewbox .project__content--list-viewimg::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  transition: 0.33s ease-in-out;
+}
+#project .project__content .project__content--list .project__content--list-viewbox button {
+  padding: 0;
+}
+#project .project__content .project__content--list .project__content--list-viewbox.view {
+  pointer-events: none;
+  transform: scale(0);
+}
+#project .project__content .project__content--list .project__content--list-viewbox:hover .project__content--list-viewimg::after {
+  opacity: 0.25;
+}
+#project .project__content .project__content--list .project__content--list-viewbox:hover i {
+  transform: translateX(1rem);
+}
+#project .project__content .project__content--list .project__content--list-box {
+  background: #fff;
+  transform: scale(0);
+  pointer-events: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+#project .project__content .project__content--list .project__content--list-box.view {
+  pointer-events: visible;
+  transform: scale(1);
+}
+#project .project__content .project__content--list .project__content--list-box > div {
+  padding: 2.5% 2%;
+  overflow: hidden;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-inner {
+  overflow-x: scroll;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-inner::-webkit-scrollbar {
+  display: none;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-inner ul {
+  height: 100%;
+  padding: 4% 0 0;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-inner ul li {
+  padding-right: 2rem;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-inner .project__content--list-viewbtn, #project .project__content .project__content--list .project__content--list-box .project__content--list-inner .project__content--list-btn {
+  color: #222;
+  font-size: 2.5rem;
+  line-height: 0;
+  margin-right: 0.5rem;
+  transition: 0.33s ease-in-out;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-img {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-text {
+  font-size: 1.2rem;
+  margin-bottom: 3%;
+  pointer-events: none;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-text .date {
+  color: #aaaaaa;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--list-text strong {
+  font-size: 1.4rem;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--btn {
+  top: 2%;
+  right: 1%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 3rem;
+  line-height: 0;
+  color: #222222;
+  transition: 0.33s ease-in-out;
+  z-index: 5;
+}
+#project .project__content .project__content--list .project__content--list-box .project__content--btn:hover {
+  transform: rotateZ(180deg);
+}
+#project .project__content .project__content--list .project__content--list-text {
+  color: #222;
+  padding-top: 5%;
+}
+#project .project__content .project__content--list .project__content--list-text strong {
+  font-size: 1.2rem;
+  padding-bottom: 3%;
+}
+#project .project__content .project__content--list .project__content--list-text i {
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: 0.33s ease-in-out;
+}
+#project .modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+#project .modal .modal__background {
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+#project .modal .modal__content {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  max-width: 800px;
+  margin: 10vh auto;
+  padding: 6rem 5rem 7rem;
+  border-radius: 0.5rem;
+  background-color: rgb(255, 255, 255);
+  overflow: auto;
+  z-index: 2;
+}
+#project .modal .modal__content::-webkit-scrollbar {
+  width: 1.5rem;
+}
+#project .modal .modal__content::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 2rem;
+  min-height: 5rem;
+  border: 0.5rem solid #fff;
+}
+#project .modal .modal__content::-webkit-scrollbar-track {
+  background: transparent;
+}
+#project .modal .modal__content::-webkit-scrollbar-button {
+  display: none;
+}
+#project .modal .modal__content .modal__content--close {
+  top: 1rem;
+  left: 1rem;
+  border-radius: 50%;
+}
+#project .modal .modal__content .modal__content--close i {
+  color: #222;
+  font-size: 2.5rem;
+}
+#project .modal .modal__content .modal__content--img {
+  width: 100%;
+}
+#project .modal .modal__content .modal__content--img img {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 5rem;
+}
+#project .modal .modal__content .modal__content--img img:first-child {
+  margin-top: 0;
+}
+#project .modal .modal__content .modal__content--text {
+  color: #222;
+  margin-bottom: 3rem;
+}
+#project .modal .modal__content .modal__content--date {
+  color: #aaaaaa;
+  margin-bottom: 1.5rem;
+}
+#project .modal .modal__content .modal__content--title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+#project .modal .modal__content .modal__content--summary {
+  font-size: 1.2rem;
+  line-height: 1.75;
+}
+#project .modal .modal__content .modal__content--summary span {
+  display: block;
+}
+
+@media (min-width: 750px) and (max-width: 1200px) {
+  #project .project__content {
+    height: 90%;
+    padding-top: 5rem;
+  }
+  #project .project__content .project__content--box {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  #project .project__content .project__content--box > li {
+    width: 100%;
+    height: auto;
+  }
+  #project .project__content .project__content--box > li:nth-child(2) {
+    width: 100%;
+    height: 80%;
+    min-height: 400px;
+    padding-left: 0;
+    margin-top: 2rem;
+  }
+  #project .project__content .project__content--git {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+  }
+  #project .project__content .project__content--git .project__content--git-img {
+    width: 10rem;
+  }
+  #project .project__content .project__content--git .project__content--git-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 0;
+    padding-left: 2.5rem;
+  }
+  #project .project__content .project__content--git .project__content--git-text strong {
+    padding-bottom: 0;
+    margin-right: 2rem;
+  }
+  #project .project__content .project__content--list .project__content--list-viewbox {
+    width: 30rem;
+  }
+  #project .project__content .project__content--list .project__content--list-box > div {
+    padding: 2.5% 2%;
+  }
+  #project .project__content .project__content--list .project__content--list-box .project__content--list-inner ul {
+    padding: 3rem 0 0;
+  }
+  #project .project__content .project__content--list .project__content--list-box .project__content--btn {
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2.5rem;
+  }
+  #project .modal .modal__content {
+    width: 75%;
+    max-width: none;
+    min-width: 65rem;
+  }
+}
+@media (max-width: 750px) {
+  #project .project__content {
+    height: 90%;
+    padding-top: 5rem;
+  }
+  #project .project__content .project__content--box {
+    width: 95%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  #project .project__content .project__content--box > li {
+    height: auto;
+    width: 100%;
+  }
+  #project .project__content .project__content--box > li:nth-child(2) {
+    width: 100%;
+    height: 87.5%;
+    padding-left: 0;
+    margin-top: 2.5%;
+  }
+  #project .project__content .project__content--git {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+  }
+  #project .project__content .project__content--git .project__content--git-img {
+    width: 10rem;
+  }
+  #project .project__content .project__content--git .project__content--git-text {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    padding-left: 2.5rem;
+  }
+  #project .project__content .project__content--git .project__content--git-text strong {
+    padding-bottom: 0;
+    margin-right: 2rem;
+  }
+  #project .project__content .project__content--list .project__content--list-viewbox {
+    width: 80%;
+    min-width: 30rem;
+    max-width: 40rem;
+  }
+  #project .project__content .project__content--list .project__content--list-box .project__content--list-inner ul {
+    padding: 3rem 0 0;
+  }
+  #project .project__content .project__content--list .project__content--list-box .project__content--btn {
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2.5rem;
+  }
+  #project .modal .modal__content {
+    width: 80%;
+    max-width: none;
+    padding: 5rem 3rem 6rem;
+  }
+  #project .modal .modal__content .modal__content--close i {
+    font-size: 2rem;
+  }
+  #project .modal .modal__content .modal__content--img img {
+    margin-top: 3rem;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

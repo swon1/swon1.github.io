@@ -1,0 +1,105 @@
+@charset "utf-8";
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%; /* iOS 가로 모드 글자 크기 뻥튀기 방지 */
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed; /* 렌더링 속도 최적화 */
+    -webkit-font-smoothing: antialiased; /* 폰트 부드럽게 (Mac OS) */
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Noto Sans KR', 'Nanum Gothic', sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    pointer-events: none;
+}
+
+/* 7. 폼 요소 폰트 상속 (크로스브라우징 핵심 이슈 해결) */
+input, button, textarea, select {
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    border: none; /* 디자인에 따라 1px solid #ccc 등으로 변경 가능 */
+}
+
+/* 8. 버튼 클릭 시 커서 포인터 & 터치 최적화 */
+button {
+    cursor: pointer;
+    touch-action: manipulation; /* 더블탭 줌 방지 (모바일 UX) */
+}
+
+/* 9. 텍스트 줄바꿈 최적화 (2024+ 트렌드) */
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance; /* 제목이 한 단어만 툭 떨어지는 것 방지 */
+    line-height: 1.1;
+}
+
+p {
+    text-wrap: pretty; /* 단락의 마지막 줄에 한 단어만 남는 것 방지 (고아 단어 방지) */
+}
+
+/* 10. 링크 기본 스타일 */
+a {
+    text-decoration-skip-ink: auto; /* 밑줄이 글자를 가리지 않도록 설정 */
+    color: inherit;
+    text-decoration: none;
+}
+
+em {
+    font-style: normal;
+}
+
+/* 11. 숨김 속성 강제 적용 */
+[hidden] {
+    display: none !important;
+}
+
+/* 12. 접근성: 키보드 포커스 스타일은 절대 끄지 않음 (마우스 클릭 시엔 제거 가능) */
+:focus-visible {
+    outline: 2px solid #2563eb; /* 브랜드 컬러로 변경 권장 */
+    outline-offset: 2px;
+}
+
+/* 13. (선택사항) 2025년 최신: 애니메이션 높이 보간 허용 */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        interpolate-size: allow-keywords; /* height: auto로의 애니메이션 허용 (지원 브라우저 한정) */
+    }
+}
+
+/* 14. 사용자 설정: 동작 줄이기 (접근성) */
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

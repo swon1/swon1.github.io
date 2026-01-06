@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+// 웹폰트 -- head에 link 태그 방식으로 선반영 (로딩속도 및 성능 우수)
+// @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+
+
+
+// 기본 스타일
+@import "base/reset";
+@import "base/common";
+@import "base/mixin";
+
+
+
+@import "layout/nav";
+@import "layout/content";
+@import "layout/section_home";
+@import "layout/section_info";
+@import "layout/section_project";
