@@ -184,7 +184,7 @@
             > li {
                 flex: none;
                 &:first-child {
-                    flex-grow: none;
+                    flex-grow: 0;
                 }
             }
         }

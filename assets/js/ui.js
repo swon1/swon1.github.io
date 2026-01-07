@@ -50,6 +50,7 @@ export function uiFn () {
             let modalDate = (e.target).getAttribute('data-project-list');
 
             document.querySelector('.modal').style.display = 'block';
+            document.querySelector('.modal').classList.add('active');
             document.querySelector(`#${modalDate}`).style.display = 'block';
             document.querySelector(`#${modalDate}`).classList.add('view');
         });
@@ -58,6 +59,7 @@ export function uiFn () {
     modalClose.forEach( (el, i) => {
         el.addEventListener('click', (e) => {
             document.querySelector('.modal').style.display = 'none';
+            document.querySelector('.modal').classList.remove('active');
             document.querySelector('.modal__content.view').style.display = 'none';
             document.querySelector('.modal__content.view').classList.remove('view');
         });
