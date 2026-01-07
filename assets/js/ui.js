@@ -129,8 +129,6 @@ export function sectionMotion () {
                 let modalProperty = modalStyle.display;
                 if ( modalProperty == 'block' ) {
                     return;
-                } else if ( projectBox.classList.contains('view') ) {
-                    return;
                 } else {
                     event.preventDefault();
                     let wCheck = event.wheelDelta;
@@ -179,6 +177,8 @@ export function sectionMotion () {
                 let modalStyle = getComputedStyle(modal);
                 let modalProperty = modalStyle.display;
                 if ( modalProperty == 'block' ) {
+                    return;
+                } else if ( projectBox.classList.contains('view') ) {
                     return;
                 } else {
                     evt.preventDefault();
