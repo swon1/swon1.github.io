@@ -59,11 +59,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-    text-wrap: pretty; /* 단락의 마지막 줄에 한 단어만 남는 것 방지 (고아 단어 방지) */
+    text-wrap: inherit;//pretty;
 }
 
 /* 10. 링크 기본 스타일 */
 a {
+    display: block;
     text-decoration-skip-ink: auto; /* 밑줄이 글자를 가리지 않도록 설정 */
     color: inherit;
     text-decoration: none;
