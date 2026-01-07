@@ -425,13 +425,16 @@ i {
   #info .info__content > li {
     flex: none;
   }
+  #info .info__content > li:first-child {
+    flex-grow: none;
+  }
   #info .info__content--profile {
     display: flex;
     margin-bottom: 1rem;
   }
   #info .info__content--profile img {
     max-width: 10rem;
-    height: min-content;
+    height: fit-content;
   }
   #info .info__content--profile p {
     margin-left: 4%;

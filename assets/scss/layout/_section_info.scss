@@ -183,6 +183,9 @@
 
             > li {
                 flex: none;
+                &:first-child {
+                    flex-grow: none;
+                }
             }
         }
 
@@ -192,7 +195,7 @@
 
             img {
                 max-width: 10rem;
-                height: min-content;
+                height: fit-content;
             }
             p {
                 margin-left: 4%;
