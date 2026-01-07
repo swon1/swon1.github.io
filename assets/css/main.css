@@ -466,6 +466,9 @@ i {
     font-size: 1.2rem !important;
     margin-right: 1rem;
   }
+  #info .info__content--skill {
+    margin-top: 2rem;
+  }
   #info .info__content--skill dl dd ul {
     display: flex;
     justify-content: space-between;
