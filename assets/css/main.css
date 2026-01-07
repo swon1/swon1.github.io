@@ -63,7 +63,6 @@ p {
 
 /* 10. 링크 기본 스타일 */
 a {
-  display: block;
   text-decoration-skip-ink: auto; /* 밑줄이 글자를 가리지 않도록 설정 */
   color: inherit;
   text-decoration: none;
@@ -299,6 +298,9 @@ i {
 }
 
 @media (max-width: 750px) {
+  #home canvas#polyCanvas {
+    display: none;
+  }
   #home .home__content h1 {
     font-size: 3rem;
     letter-spacing: 0.25rem;
@@ -435,7 +437,7 @@ i {
   }
   #info .info__content--profile img {
     max-width: 10rem;
-    height: fit-content;
+    height: 13.5rem;
   }
   #info .info__content--profile p {
     margin-left: 4%;
