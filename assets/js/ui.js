@@ -74,6 +74,7 @@ export function sectionMotion () {
     let idx = 0;
     let motion;
 
+    let projectBox = document.querySelector('.project__content--list-box');
     let modal = document.querySelector('.modal');
 
     box[0].style.top = '0%';
@@ -128,6 +129,8 @@ export function sectionMotion () {
                 let modalProperty = modalStyle.display;
                 if ( modalProperty == 'block' ) {
                     return;
+                } else if ( projectBox.classList.contains('view') ) {
+                    return;
                 } else {
                     event.preventDefault();
                     let wCheck = event.wheelDelta;
@@ -158,6 +161,8 @@ export function sectionMotion () {
                     let modalStyle = getComputedStyle(modal);
                     let modalProperty = modalStyle.display;
                     if ( modalProperty == 'block' ) {
+                        return;
+                    } else if ( projectBox.classList.contains('view') ) {
                         return;
                     } else {
                         evt.preventDefault();
@@ -250,7 +255,7 @@ export function sectionMotion () {
     }
 
     wheelFn();
-    // touchFn();
+    touchFn();
     navFn();
     updateNavStatus();
 }
