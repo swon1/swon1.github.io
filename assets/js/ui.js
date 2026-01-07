@@ -154,14 +154,18 @@ export function sectionMotion () {
 
         [].forEach.call( box, ( el ) => {
             el.addEventListener('touchstart', ( evt ) => {
-                let modalStyle = getComputedStyle(modal);
-                let modalProperty = modalStyle.display;
-                if ( modalProperty == 'block' ) {
-                    return;
+                if ( !evt.target.closest('a, button, input') ) {
+                    let modalStyle = getComputedStyle(modal);
+                    let modalProperty = modalStyle.display;
+                    if ( modalProperty == 'block' ) {
+                        return;
+                    } else {
+                        evt.preventDefault();
+                        $touchCheck = false;
+                        $touchStart = evt.touches[0].pageY;
+                    }
                 } else {
-                    evt.preventDefault();
-                    $touchCheck = false;
-                    $touchStart = evt.touches[0].pageY;
+                    return;
                 }
             });
 
@@ -246,7 +250,7 @@ export function sectionMotion () {
     }
 
     wheelFn();
-    // touchFn();
+    touchFn();
     navFn();
     updateNavStatus();
 }

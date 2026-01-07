@@ -236,7 +236,7 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        z-index: 0;
+        z-index: 99;
 
         &.active {
             opacity: 99;

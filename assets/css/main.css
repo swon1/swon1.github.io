@@ -298,9 +298,6 @@ i {
 }
 
 @media (max-width: 750px) {
-  #home canvas#polyCanvas {
-    display: none;
-  }
   #home .home__content h1 {
     font-size: 3rem;
     letter-spacing: 0.25rem;
@@ -681,7 +678,7 @@ i {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  z-index: 0;
+  z-index: 99;
 }
 #project .modal.active {
   opacity: 99;
