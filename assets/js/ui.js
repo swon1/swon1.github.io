@@ -246,7 +246,7 @@ export function sectionMotion () {
     }
 
     wheelFn();
-    touchFn();
+    // touchFn();
     navFn();
     updateNavStatus();
 }
